@@ -1,0 +1,7 @@
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+jinja2>=3.1.0
+python-multipart>=0.0.9
+
+# Optional: only needed if you enable real Gemini AI (see README "Enabling Gemini AI")
+# google-generativeai>=0.5.0

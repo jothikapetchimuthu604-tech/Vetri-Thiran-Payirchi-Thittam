@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — PocketSmart AI{% endblock %}
+{% block content %}
+<div class="dash-header">
+  <h1>Welcome, {{ user }}!</h1>
+  <p>Choose a planner to get started with your personalized budget plan.</p>
+</div>
+
+<section class="cards">
+  <div class="card">
+    <div class="card-icon">🏠</div>
+    <h3>Home Interior Planner</h3>
+    <p>Plan furniture, lighting, and fans within your budget.</p>
+    <a href="/home-planner" class="btn-solid">Get Started</a>
+  </div>
+  <div class="card">
+    <div class="card-icon">🎉</div>
+    <h3>Party Planner</h3>
+    <p>Budget allocation for catering, decoration, and entertainment.</p>
+    <a href="/party-planner" class="btn-solid">Get Started</a>
+  </div>
+  <div class="card">
+    <div class="card-icon">💍</div>
+    <h3>Jewelry Planner</h3>
+    <p>Occasion-matched jewelry within your budget.</p>
+    <a href="/jewelry-planner" class="btn-solid">Get Started</a>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Recent Activity</h2>
+  {% if recent %}
+    <ul class="history-list">
+      {% for r in recent %}
+        <li>
+          <span class="badge">{{ r.type }}</span>
+          <span>{{ r.input_summary }}</span>
+          <span class="muted">{{ r.timestamp }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="/history" class="link">View all history →</a>
+  {% else %}
+    <p class="muted">No recommendations generated yet. Try one of the planners above.</p>
+  {% endif %}
+</section>
+{% endblock %}

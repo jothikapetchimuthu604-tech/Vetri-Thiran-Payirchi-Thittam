@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Jewelry Planner — PocketSmart AI{% endblock %}
+{% block content %}
+<div class="planner-header">
+  <h1>💍 Jewelry Budget Planner</h1>
+  <p>Get AI-powered jewelry recommendations within your budget for any occasion.</p>
+</div>
+
+<form method="post" action="/jewelry-planner" enctype="multipart/form-data" class="planner-form">
+  <div class="panel">
+    <h3>Budget Details</h3>
+    <label>Total Budget (₹)</label>
+    <input type="number" name="total_budget" min="500" step="1" required>
+  </div>
+
+  <div class="panel">
+    <h3>Occasion & Preferences</h3>
+    <label>Occasion</label>
+    <input type="text" name="occasion" placeholder="e.g. Wedding, Birthday, Anniversary">
+    <label>Style Preferences</label>
+    <textarea name="preferences" rows="3" placeholder="Describe your style preferences, materials, colors, etc."></textarea>
+  </div>
+
+  <div class="panel">
+    <h3>Upload Outfit Image (optional)</h3>
+    <input type="file" name="outfit_image" accept="image/*">
+    <p class="muted">Used to inform color/style coordination in the recommendation.</p>
+  </div>
+
+  <button type="submit" class="btn-solid large">Get Recommendations</button>
+</form>
+
+{% include "_results.html" %}
+{% endblock %}

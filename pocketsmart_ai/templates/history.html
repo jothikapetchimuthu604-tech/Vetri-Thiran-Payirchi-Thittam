@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}History — PocketSmart AI{% endblock %}
+{% block content %}
+<div class="planner-header">
+  <h1>Your Recommendation History</h1>
+  <p>View all your previous budget plans and recommendations.</p>
+</div>
+
+{% if records %}
+<div class="cards">
+  {% for r in records %}
+  <div class="card history-card">
+    <span class="badge">{{ r.type }}</span>
+    <h3>{{ r.input_summary }}</h3>
+    <p class="muted">{{ r.timestamp }}</p>
+    <p><strong>Total:</strong> ₹{{ "%.2f"|format(r.result.total_budget) }} ·
+       <strong>Remaining:</strong> ₹{{ "%.2f"|format(r.result.remaining_budget) }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="muted">No recommendations yet. Head to one of the planners to generate your first plan.</p>
+{% endif %}
+{% endblock %}

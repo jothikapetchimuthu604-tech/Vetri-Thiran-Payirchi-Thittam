@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Home Interior Planner — PocketSmart AI{% endblock %}
+{% block content %}
+<div class="planner-header">
+  <h1>🏠 Home Interior Budget Planner</h1>
+  <p>Create a customized budget plan for your dream home interior.</p>
+</div>
+
+<form method="post" action="/home-planner" class="planner-form">
+  <div class="panel">
+    <h3>Budget Details</h3>
+    <label>Total Budget (₹)</label>
+    <input type="number" name="total_budget" min="500" step="1" required>
+  </div>
+
+  <div class="panel">
+    <h3>Fixtures & Furniture</h3>
+    <div class="grid-2">
+      <div><label>Number of Lights/Fixtures</label><input type="number" name="num_lights" min="0" value="0"></div>
+      <div><label>Number of Ceiling Fans</label><input type="number" name="num_fans" min="0" value="0"></div>
+      <div><label>Number of Furniture Pieces</label><input type="number" name="num_furniture" min="0" value="0"></div>
+      <div><label>Number of Dining Tables</label><input type="number" name="num_dining_tables" min="0" value="0"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Rooms to Include</h3>
+    <div class="checkbox-row">
+      <label><input type="checkbox" name="rooms" value="Living Room"> Living Room</label>
+      <label><input type="checkbox" name="rooms" value="Kitchen"> Kitchen</label>
+      <label><input type="checkbox" name="rooms" value="Bedroom"> Bedroom</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Additional Information</h3>
+    <label>Special Requirements or Preferences</label>
+    <textarea name="notes" rows="3" placeholder="Any specific requirements or preferences..."></textarea>
+  </div>
+
+  <button type="submit" class="btn-solid large">Generate Recommendations</button>
+</form>
+
+{% include "_results.html" %}
+{% endblock %}

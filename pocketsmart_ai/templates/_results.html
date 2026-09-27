@@ -1,0 +1,51 @@
+{% if result %}
+<section class="results">
+  <h2>Your Personalized Budget Plan</h2>
+
+  <div class="summary-bar">
+    <div><span class="label">Total Budget</span><span class="value">₹{{ "%.2f"|format(result.total_budget) }}</span></div>
+    <div><span class="label">Remaining</span><span class="value">₹{{ "%.2f"|format(result.remaining_budget) }}</span></div>
+  </div>
+
+  {% if result.outfit_analysis %}
+  <div class="panel small">
+    <h3>Outfit / Style Analysis</h3>
+    <p>Style: <strong>{{ result.outfit_analysis.style }}</strong> ·
+       Formality: <strong>{{ result.outfit_analysis.formality }}</strong> ·
+       Image provided: <strong>{{ "Yes" if result.outfit_analysis.image_provided else "No" }}</strong></p>
+  </div>
+  {% endif %}
+
+  {% for cat in result.budget_breakdown %}
+  <div class="panel">
+    <div class="panel-header">
+      <h3>{{ cat.category }}</h3>
+      <span class="allocation">₹{{ "%.2f"|format(cat.allocation) }}</span>
+    </div>
+    {% for item in cat.products %}
+    <div class="item-row">
+      <div class="item-main">
+        <strong>{{ item.name }}</strong>
+        <p class="muted">{{ item.description }}</p>
+      </div>
+      <div class="item-price">₹{{ "%.2f"|format(item.estimated_price) }}{% if item.quantity %} × {{ item.quantity }}{% endif %}</div>
+      <div class="item-links">
+        {% for platform, url in item.shopping_links.items() %}
+          <a href="{{ url }}" target="_blank" rel="noopener" class="link-chip">{{ platform|capitalize }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="panel suggestions">
+    <h3>💡 Additional Suggestions</h3>
+    <ul>
+      {% for tip in result.additional_suggestions %}
+        <li>{{ tip }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
